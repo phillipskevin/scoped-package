@@ -1,0 +1,44 @@
+{
+  "name": "@phillipskevin/scoped-package",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/phillipskevin/@phillipskevin/scoped-package.git"
+  },
+  "author": {
+    "name": "Kevin Phillips",
+    "email": "kphillips86@gmail.com",
+    "url": ""
+  },
+  "scripts": {
+    "preversion": "npm test && npm run build",
+    "version": "git commit -am \"Update version number\" && git checkout -b release && git add -f dist/",
+    "postpublish": "git push --tags && git checkout master && git branch -D release && git push",
+    "testee": "testee test.html --browsers firefox",
+    "test": "npm run jshint && npm run testee",
+    "jshint": "jshint ./*.js --config",
+    "release:patch": "npm version patch && npm publish --access=public",
+    "release:minor": "npm version minor && npm publish --access=public",
+    "release:major": "npm version major && npm publish --access=public",
+    "build": "node build.js"
+  },
+  "main": "scoped-package",
+  "steal": {
+    "npmIgnore": [
+      "testee",
+      "steal-tools"
+    ]
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jshint": "^2.9.1",
+    "steal": "^1.3.1",
+    "steal-qunit": "^1.0.1",
+    "steal-tools": "^1.2.0",
+    "testee": "^0.3.0"
+  },
+  "license": "MIT"
+}
